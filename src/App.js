@@ -1,53 +1,16 @@
-import { useState, useEffect } from "react";
-import { nanoid } from "nanoid";
+import { useState, useEffect, useContext } from "react";
+import { Context } from "./Context";
 import Cards from "./Cards";
 
 function App() {
-  const storedList = JSON.parse(localStorage.getItem("items"));
-  const [list, setList] = useState(storedList);
+  const AppContext = useContext(Context);
 
-  const [job, setJob] = useState({
-    id: nanoid(),
-    title: "",
-    company: "",
-    salary: "",
-    applied: false,
-  });
-
-  function handleChange(event) {
-    const { name, value, type, checked } = event.target;
-    setJob((prevJob) => {
-      return {
-        ...prevJob,
-        [name]: type === "checkbox" ? checked : value,
-      };
-    });
-  }
-
-  useEffect(() => {
-    localStorage.setItem("items", JSON.stringify(storedList));
-  }, [storedList]);
-
-  function reset() {
-    setJob({
-      id: nanoid(),
-      title: "",
-      company: "",
-      salary: "",
-      applied: false,
-    });
-  }
+  const { list, job, setJob, handleChange, handleSubmit, reset } =
+    useContext(Context);
 
   const cardElements = list.map((job) => (
     <Cards id={job.id} key={job.id} info={job} />
   ));
-
-  function handleSubmit(event) {
-    event.preventDefault();
-    console.log(job);
-    setList([...list, job]);
-    reset();
-  }
 
   return (
     <div>
