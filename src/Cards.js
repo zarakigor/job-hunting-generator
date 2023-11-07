@@ -1,5 +1,6 @@
+import { useState, useContext } from "react";
+import { Context } from "./Context";
 import Modal from "react-modal";
-import { useState } from "react";
 
 const customStyles = {
   content: {
@@ -15,7 +16,10 @@ const customStyles = {
 Modal.setAppElement("#root");
 
 function Cards(props) {
-  console.log(props);
+  //const { list, job, handleChange, handleSubmit } = useContext(Context);
+  const [copiedJob, setCopiedJob] = useState({ ...props.details });
+
+  //console.log(copiedJob);
   let subtitle;
   const [modalIsOpen, setIsOpen] = useState(false);
   function openModal() {
@@ -28,19 +32,31 @@ function Cards(props) {
   }
 
   function closeModal() {
+    // save ve normal çıkış arasında farkı belirle. birinde resetle diğerinde kaydet
+    setCopiedJob({ ...props.details });
     setIsOpen(false);
+  }
+
+  function handleEdit(event) {
+    const { name, value, type, checked } = event.target;
+    setCopiedJob((prevJob) => {
+      return {
+        ...prevJob,
+        [name]: type === "checkbox" ? checked : value,
+      };
+    });
   }
 
   return (
     <div className="card">
       <h4>
-        Title:<span>{props.info.title}</span>
+        Title:<span>{props.details.title}</span>
       </h4>
       <h4>
-        Company:<span>{props.info.company}</span>
+        Company:<span>{props.details.company}</span>
       </h4>
       <h4>
-        Salary:<span>{props.info.salary}</span>
+        Salary:<span>{props.details.salary}</span>
       </h4>
       <button onClick={openModal}>Open Modal</button>
       <Modal
@@ -55,9 +71,15 @@ function Cards(props) {
         <form>
           <label>
             Title:
-            <input type="text" name="company" value={props.info.title} />
+            <input
+              type="text"
+              name="title"
+              onChange={handleEdit}
+              value={copiedJob.title}
+            />
           </label>
         </form>
+        {/* <p>{copiedJob}</p> */}
       </Modal>
     </div>
   );
