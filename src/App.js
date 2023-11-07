@@ -1,16 +1,16 @@
-import { useState, useEffect, useContext } from "react";
+import { useContext } from "react";
 import { Context } from "./Context";
 import Cards from "./Cards";
 
 function App() {
-  const AppContext = useContext(Context);
+  const { list, job, handleChange, handleSubmit } = useContext(Context);
 
-  const { list, job, setJob, handleChange, handleSubmit, reset } =
-    useContext(Context);
-
-  const cardElements = list.map((job) => (
-    <Cards id={job.id} key={job.id} info={job} />
-  ));
+  let cardElements = [];
+  if (list && list.length > 0) {
+    cardElements = list.map((job) => (
+      <Cards id={job.id} key={job.id} details={job} />
+    ));
+  }
 
   return (
     <div>
