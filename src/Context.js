@@ -1,11 +1,11 @@
-import React, { useState, useEffect, createContext } from "react";
+import React, { useState, createContext } from "react";
 import { nanoid } from "nanoid";
 
 const Context = createContext();
 
 function ContextProvider({ children }) {
-  const storedList = JSON.parse(localStorage.getItem("items"));
-  const [list, setList] = useState(storedList);
+  const storedList = JSON.parse(localStorage.getItem("items")) || [];
+  const [list, setList] = useState(storedList || []);
 
   const [job, setJob] = useState({
     id: nanoid(),
@@ -25,10 +25,6 @@ function ContextProvider({ children }) {
     });
   }
 
-  useEffect(() => {
-    localStorage.setItem("items", JSON.stringify(storedList));
-  }, [storedList]);
-
   function reset() {
     setJob({
       id: nanoid(),
@@ -41,8 +37,8 @@ function ContextProvider({ children }) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.log(job);
     setList([...list, job]);
+    localStorage.setItem("items", JSON.stringify([...list, job]));
     reset();
   }
 
