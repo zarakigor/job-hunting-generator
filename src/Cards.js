@@ -18,8 +18,13 @@ Modal.setAppElement("#root");
 function Cards(props) {
   //const { list, job, handleChange, handleSubmit } = useContext(Context);
   const [copiedJob, setCopiedJob] = useState({ ...props.details });
+  const [isEditing, setIsEditing] = useState(false);
 
-  //console.log(copiedJob);
+  function handleModalView() {
+    setIsEditing(!isEditing);
+    console.log(isEditing);
+  }
+
   let subtitle;
   const [modalIsOpen, setIsOpen] = useState(false);
   function openModal() {
@@ -28,7 +33,7 @@ function Cards(props) {
 
   function afterOpenModal() {
     // references are now sync'd and can be accessed.
-    subtitle.style.color = "#f00";
+    //subtitle.style.color = "#f00";
   }
 
   function closeModal() {
@@ -59,6 +64,7 @@ function Cards(props) {
         Salary:<span>{props.details.salary}</span>
       </h4>
       <button onClick={openModal}>Open Modal</button>
+
       <Modal
         isOpen={modalIsOpen}
         onAfterOpen={afterOpenModal}
@@ -66,20 +72,26 @@ function Cards(props) {
         style={customStyles}
         contentLabel="Example Modal"
       >
-        <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Hello</h2>
-        <button onClick={closeModal}>close</button>
-        <form>
-          <label>
-            Title:
-            <input
-              type="text"
-              name="title"
-              onChange={handleEdit}
-              value={copiedJob.title}
-            />
-          </label>
-        </form>
-        {/* <p>{copiedJob}</p> */}
+        {!isEditing ? (
+          <button onClick={handleModalView}>Editi aç</button>
+        ) : (
+          <div>
+            <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Hello</h2>
+            <button onClick={closeModal}>close</button>
+            <button onClick={handleModalView}>Editi kapat</button>
+            <form>
+              <label>
+                Title:
+                <input
+                  type="text"
+                  name="title"
+                  onChange={handleEdit}
+                  value={copiedJob.title}
+                />
+              </label>
+            </form>
+          </div>
+        )}
       </Modal>
     </div>
   );
