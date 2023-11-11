@@ -1,4 +1,4 @@
-import React, { useState, createContext } from "react";
+import React, { useState, createContext, useEffect } from "react";
 import { nanoid } from "nanoid";
 
 const Context = createContext();
@@ -6,6 +6,8 @@ const Context = createContext();
 function ContextProvider({ children }) {
   const storedList = JSON.parse(localStorage.getItem("items")) || [];
   const [list, setList] = useState(storedList || []);
+
+  const [isDark, setIsDark] = useState(false);
 
   const [job, setJob] = useState({
     id: nanoid(),
@@ -35,6 +37,14 @@ function ContextProvider({ children }) {
     });
   }
 
+  useEffect(() => {
+    if (isDark) {
+      document.body.classList.add("dark");
+    } else {
+      document.body.classList.remove("dark");
+    }
+  }, [isDark]);
+
   function handleSubmit(event) {
     event.preventDefault();
     setList([...list, job]);
@@ -46,11 +56,14 @@ function ContextProvider({ children }) {
     <Context.Provider
       value={{
         list,
+        setList,
         job,
         setJob,
         handleChange,
         handleSubmit,
         reset,
+        isDark,
+        setIsDark,
       }}
     >
       {children}
