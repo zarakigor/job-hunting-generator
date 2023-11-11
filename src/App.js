@@ -3,7 +3,7 @@ import { Context } from "./Context";
 import Cards from "./Cards";
 
 function App() {
-  const { list, job, handleChange, handleSubmit } = useContext(Context);
+  const { list, job, setJob, handleChange, handleSubmit } = useContext(Context);
 
   let cardElements = [];
   if (list && list.length > 0) {
