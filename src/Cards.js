@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { Context } from "./Context";
 import Modal from "react-modal";
 
@@ -16,19 +16,15 @@ const customStyles = {
 Modal.setAppElement("#root");
 
 function Cards(props) {
-  //const { list, job, handleChange, handleSubmit } = useContext(Context);
+  const { list, setList, isDark, setIsDark } = useContext(Context);
   const [copiedJob, setCopiedJob] = useState({ ...props.details });
   const [isEditing, setIsEditing] = useState(false);
-
-  function handleModalView() {
-    setIsEditing(!isEditing);
-    console.log(isEditing);
-  }
+  const [isSaving, setIsSaving] = useState(false);
 
   let subtitle;
-  const [modalIsOpen, setIsOpen] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   function openModal() {
-    setIsOpen(true);
+    setModalIsOpen(true);
   }
 
   function afterOpenModal() {
@@ -37,9 +33,12 @@ function Cards(props) {
   }
 
   function closeModal() {
-    // save ve normal çıkış arasında farkı belirle. birinde resetle diğerinde kaydet
-    setCopiedJob({ ...props.details });
-    setIsOpen(false);
+    if (!isSaving) {
+      setCopiedJob({ ...props.details });
+    }
+    setIsEditing(false);
+    setModalIsOpen(false);
+    setIsSaving(false);
   }
 
   function handleEdit(event) {
@@ -52,10 +51,28 @@ function Cards(props) {
     });
   }
 
+  //handle translation between editing job and viewing details of the job
+  function handleModalView() {
+    setIsEditing(!isEditing);
+  }
+
+  function handleSaveEdit(event) {
+    setIsSaving(true);
+    let temp = list;
+    temp.map((element, index) => {
+      if (props.id === element.id) {
+        temp[index] = copiedJob;
+        setList(temp);
+        localStorage.setItem("items", JSON.stringify([...list]));
+      }
+    });
+  }
+
+  //propsları copiede çevir
   return (
-    <div className="card">
+    <div className="card" id={props.id}>
       <h4>
-        Title:<span>{props.details.title}</span>
+        Title:<span>{copiedJob.title}</span>
       </h4>
       <h4>
         Company:<span>{props.details.company}</span>
@@ -77,8 +94,6 @@ function Cards(props) {
         ) : (
           <div>
             <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Hello</h2>
-            <button onClick={closeModal}>close</button>
-            <button onClick={handleModalView}>Editi kapat</button>
             <form>
               <label>
                 Title:
@@ -90,6 +105,13 @@ function Cards(props) {
                 />
               </label>
             </form>
+            <button onClick={closeModal}>close</button>
+            <button onClick={handleModalView}>Editi Kapat</button>
+            <button onClick={handleSaveEdit}>Save Changes</button>
+            <button onClick={() => setIsDark(!isDark)}>dark</button>
+            <button onClick={() => console.log(props.details.title)}>
+              asdasdasd
+            </button>
           </div>
         )}
       </Modal>
