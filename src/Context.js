@@ -4,8 +4,14 @@ import { nanoid } from "nanoid";
 const Context = createContext();
 
 function ContextProvider({ children }) {
-  const storedList = JSON.parse(localStorage.getItem("items")) || [];
-  const [list, setList] = useState(storedList || []);
+  const [list, setList] = useState([]);
+
+  useEffect(() => {
+    const storedJobs = JSON.parse(localStorage.getItem("items"));
+    if (storedJobs) {
+      setList(storedJobs);
+    }
+  }, []);
 
   const [isDark, setIsDark] = useState(false);
 
@@ -52,6 +58,17 @@ function ContextProvider({ children }) {
     reset();
   }
 
+  function handleDelete(id) {
+    let temp = list;
+    temp.map((element, index) => {
+      if (id === element.id) {
+        temp.splice(index, 1);
+        setList(temp);
+        localStorage.setItem("items", JSON.stringify([...list]));
+      }
+    });
+    reset();
+  }
   return (
     <Context.Provider
       value={{
@@ -64,6 +81,7 @@ function ContextProvider({ children }) {
         reset,
         isDark,
         setIsDark,
+        handleDelete,
       }}
     >
       {children}
