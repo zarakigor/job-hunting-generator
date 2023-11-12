@@ -16,7 +16,8 @@ const customStyles = {
 Modal.setAppElement("#root");
 
 function Cards(props) {
-  const { list, setList, isDark, setIsDark } = useContext(Context);
+  const { list, setList, isDark, setIsDark, handleDelete } =
+    useContext(Context);
   const [copiedJob, setCopiedJob] = useState({ ...props.details });
   const [isEditing, setIsEditing] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
@@ -81,6 +82,7 @@ function Cards(props) {
         Salary:<span>{props.details.salary}</span>
       </h4>
       <button onClick={openModal}>Open Modal</button>
+      <button onClick={() => handleDelete(props.id)}>Delete Modal</button>
 
       <Modal
         isOpen={modalIsOpen}
@@ -90,7 +92,10 @@ function Cards(props) {
         contentLabel="Example Modal"
       >
         {!isEditing ? (
-          <button onClick={handleModalView}>Editi aç</button>
+          <div>
+            <h2>{copiedJob.title}</h2>
+            <button onClick={handleModalView}>Editi aç</button>
+          </div>
         ) : (
           <div>
             <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Hello</h2>
@@ -109,8 +114,14 @@ function Cards(props) {
             <button onClick={handleModalView}>Editi Kapat</button>
             <button onClick={handleSaveEdit}>Save Changes</button>
             <button onClick={() => setIsDark(!isDark)}>dark</button>
-            <button onClick={() => console.log(props.details.title)}>
-              asdasdasd
+            <button onClick={() => console.log(props.index)}>asdasdasd</button>
+            <button
+              onClick={() => {
+                handleDelete(props.id);
+                closeModal();
+              }}
+            >
+              Delete
             </button>
           </div>
         )}
