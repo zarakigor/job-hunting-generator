@@ -51,6 +51,15 @@ function App() {
             checked={job.applied}
           />
         </label>
+        <label>
+          Birthday:
+          <input
+            type="date"
+            name="date"
+            onChange={handleChange}
+            value={job.date}
+          />
+        </label>
         <button>Submit</button>
       </form>
       <div className="CardContainer">{cardElements}</div>
