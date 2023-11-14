@@ -76,10 +76,13 @@ function Cards(props) {
         Title:<span>{copiedJob.title}</span>
       </h4>
       <h4>
-        Company:<span>{props.details.company}</span>
+        Company:<span>{copiedJob.company}</span>
       </h4>
       <h4>
         Salary:<span>{props.details.salary}</span>
+      </h4>
+      <h4>
+        Date:<span>{copiedJob.date}</span>
       </h4>
       <button onClick={openModal}>Open Modal</button>
       <button onClick={() => handleDelete(props.id)}>Delete Modal</button>
@@ -110,11 +113,10 @@ function Cards(props) {
                 />
               </label>
             </form>
-            <button onClick={closeModal}>close</button>
-            <button onClick={handleModalView}>Editi Kapat</button>
+            <button onClick={closeModal}>Close</button>
+            <button onClick={handleModalView}>Stop Editing</button>
             <button onClick={handleSaveEdit}>Save Changes</button>
-            <button onClick={() => setIsDark(!isDark)}>dark</button>
-            <button onClick={() => console.log(props.index)}>asdasdasd</button>
+            <button onClick={() => setIsDark(!isDark)}>applied</button>
             <button
               onClick={() => {
                 handleDelete(props.id);

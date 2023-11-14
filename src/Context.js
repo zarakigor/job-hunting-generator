@@ -21,6 +21,7 @@ function ContextProvider({ children }) {
     company: "",
     salary: "",
     applied: false,
+    date: "",
   });
 
   function handleChange(event) {
@@ -40,6 +41,7 @@ function ContextProvider({ children }) {
       company: "",
       salary: "",
       applied: false,
+      date: "",
     });
   }
 
