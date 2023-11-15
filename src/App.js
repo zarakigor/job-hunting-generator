@@ -36,11 +36,20 @@ function App() {
         <label>
           Salary:
           <input
-            type="text"
+            type="number"
             name="salary"
             onChange={handleChange}
             value={job.salary}
           />
+        </label>
+        <label>
+          Currency:
+          <select value={job.currency} name="currency" onChange={handleChange}>
+            <option value="£">Sterlin</option>
+            <option value="$">Dolar</option>
+            <option value="€">Euro</option>
+            <option value="₺">Türk Lirası</option>
+          </select>
         </label>
         <label>
           Applied:

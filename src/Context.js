@@ -20,6 +20,7 @@ function ContextProvider({ children }) {
     title: "",
     company: "",
     salary: "",
+    currency: "",
     applied: false,
     date: "",
   });
@@ -40,6 +41,7 @@ function ContextProvider({ children }) {
       title: "",
       company: "",
       salary: "",
+      currency: "",
       applied: false,
       date: "",
     });

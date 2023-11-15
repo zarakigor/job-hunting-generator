@@ -84,6 +84,9 @@ function Cards(props) {
       <h4>
         Date:<span>{copiedJob.date}</span>
       </h4>
+      <h4>
+        Currency:<span>{copiedJob.currency}</span>
+      </h4>
       <button onClick={openModal}>Open Modal</button>
       <button onClick={() => handleDelete(props.id)}>Delete Modal</button>
 
