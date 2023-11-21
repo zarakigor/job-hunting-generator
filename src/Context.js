@@ -21,8 +21,12 @@ function ContextProvider({ children }) {
     company: "",
     salary: "",
     currency: "",
-    applied: false,
+    flexibility: "",
+    type: "",
+    website: "",
     date: "",
+    applied: false,
+    extraInfo: "",
   });
 
   function handleChange(event) {
