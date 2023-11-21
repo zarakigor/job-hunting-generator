@@ -14,9 +14,9 @@ function App() {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form className="FormContainer" onSubmit={handleSubmit}>
         <label>
-          Title:
+          Job Title:
           <input
             type="text"
             name="title"
@@ -25,7 +25,7 @@ function App() {
           />
         </label>
         <label>
-          Company:
+          Company/Institution:
           <input
             type="text"
             name="company"
@@ -45,10 +45,20 @@ function App() {
         <label>
           Currency:
           <select value={job.currency} name="currency" onChange={handleChange}>
+            <option value=""></option>
             <option value="£">Sterlin</option>
             <option value="$">Dolar</option>
             <option value="€">Euro</option>
             <option value="₺">Türk Lirası</option>
+          </select>
+        </label>
+        <label>
+          Job Type:
+          <select value={job.type} name="type" onChange={handleChange}>
+            <option value=""></option>
+            <option value="In Office">In Office</option>
+            <option value="Remote">Remote</option>
+            <option value="Hybrid">Hybrid</option>
           </select>
         </label>
         <label>
@@ -68,6 +78,15 @@ function App() {
             onChange={handleChange}
             value={job.date}
           />
+        </label>
+        <label>
+          Additional Information:
+          <textarea
+            type="text"
+            name="extraInfo"
+            value={job.extraInfo}
+            onChange={handleChange}
+          ></textarea>
         </label>
         <button>Submit</button>
       </form>
