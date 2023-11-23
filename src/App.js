@@ -53,13 +53,27 @@ function App() {
           </select>
         </label>
         <label>
-          Job Type:
-          <select value={job.type} name="type" onChange={handleChange}>
+          Job Flexibility:
+          <select
+            value={job.flexibility}
+            name="flexibility"
+            onChange={handleChange}
+          >
             <option value=""></option>
             <option value="In Office">In Office</option>
             <option value="Remote">Remote</option>
             <option value="Hybrid">Hybrid</option>
           </select>
+        </label>
+        <label>
+          Job Type:
+          <input
+            type="text"
+            name="type"
+            onChange={handleChange}
+            value={job.type}
+            placeholder="Contract,permanent,volunteer etc."
+          />
         </label>
         <label>
           Applied:
@@ -71,7 +85,7 @@ function App() {
           />
         </label>
         <label>
-          Birthday:
+          Application Date
           <input
             type="date"
             name="date"
@@ -86,6 +100,8 @@ function App() {
             name="extraInfo"
             value={job.extraInfo}
             onChange={handleChange}
+            rows={3}
+            cols={40}
           ></textarea>
         </label>
         <button>Submit</button>
@@ -96,3 +112,6 @@ function App() {
 }
 
 export default App;
+
+// job type a silik hatırlatıcı ekle
+// editcontainer ve viewcontainer ı 2 ayrı elemente .js ye böl
