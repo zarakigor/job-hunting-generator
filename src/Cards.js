@@ -73,19 +73,17 @@ function Cards(props) {
   return (
     <div className="card" id={props.id}>
       <h4>
-        Title:<span>{copiedJob.title}</span>
+        Title:<span> {copiedJob.title}</span>
       </h4>
       <h4>
-        Company:<span>{copiedJob.company}</span>
+        Company:<span> {copiedJob.company}</span>
       </h4>
       <h4>
-        Salary:<span>{props.details.salary}</span>
+        Salary:<span> {copiedJob.salary}</span>
+        <span> {copiedJob.currency}</span>
       </h4>
       <h4>
-        Date:<span>{copiedJob.date}</span>
-      </h4>
-      <h4>
-        Currency:<span>{copiedJob.currency}</span>
+        Date:<span> {copiedJob.date}</span>
       </h4>
       <button onClick={openModal}>Open Modal</button>
       <button onClick={() => handleDelete(props.id)}>Delete Modal</button>
@@ -99,21 +97,105 @@ function Cards(props) {
       >
         {!isEditing ? (
           <div>
-            <h2>{copiedJob.title}</h2>
+            <h2>Title: {copiedJob.title}</h2>
+            <h2>Company: {copiedJob.company}</h2>
             <button onClick={handleModalView}>Editi aç</button>
           </div>
         ) : (
-          <div>
+          <div className="EditContainer">
             <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Hello</h2>
             <form>
               <label>
-                Title:
+                Job Title:
                 <input
                   type="text"
                   name="title"
                   onChange={handleEdit}
                   value={copiedJob.title}
                 />
+              </label>
+              <label>
+                Company/Institution:
+                <input
+                  type="text"
+                  name="company"
+                  onChange={handleEdit}
+                  value={copiedJob.company}
+                />
+              </label>
+              <label>
+                Salary:
+                <input
+                  type="number"
+                  name="salary"
+                  onChange={handleEdit}
+                  value={copiedJob.salary}
+                />
+              </label>
+              <label>
+                Currency:
+                <select
+                  value={copiedJob.currency}
+                  name="currency"
+                  onChange={handleEdit}
+                >
+                  <option value=""></option>
+                  <option value="£">Sterlin</option>
+                  <option value="$">Dolar</option>
+                  <option value="€">Euro</option>
+                  <option value="₺">Türk Lirası</option>
+                </select>
+              </label>
+              <label>
+                {" "}
+                Job Flexibility:{" "}
+                <select
+                  value={copiedJob.flexibility}
+                  name="flexibility"
+                  onChange={handleEdit}
+                >
+                  <option value=""></option>
+                  <option value="In Office">In Office</option>
+                  <option value="Remote">Remote</option>
+                  <option value="Hybrid">Hybrid</option>
+                </select>
+              </label>
+              <label>
+                Job Type:{" "}
+                <input
+                  type="text"
+                  name="type"
+                  onChange={handleEdit}
+                  value={copiedJob.type}
+                  placeholder="Contract,permanent,volunteer etc."
+                />
+              </label>
+              <label>
+                Applied:{" "}
+                <input
+                  type="checkbox"
+                  name="applied"
+                  onChange={handleEdit}
+                  checked={copiedJob.applied}
+                />
+              </label>
+              <label>
+                Application Date{" "}
+                <input
+                  type="date"
+                  name="date"
+                  onChange={handleEdit}
+                  value={copiedJob.date}
+                />
+              </label>
+              <label>
+                Additional Information:
+                <textarea
+                  type="text"
+                  name="extraInfo"
+                  value={copiedJob.extraInfo}
+                  onChange={handleEdit}
+                ></textarea>
               </label>
             </form>
             <button onClick={closeModal}>Close</button>
