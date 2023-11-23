@@ -1,15 +1,13 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+*,
+*::before,
+*:after {
+  box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+html,
+body {
+  margin: 0;
+  padding: 0;
 }
 
 body {
@@ -18,6 +16,26 @@ body {
 body.dark {
   background-color: aqua;
 }
+
+textarea {
+  resize: none;
+}
+
+.FormContainer {
+  display: grid;
+}
+
+.CardContainer {
+  display: flex;
+  justify-content: space-evenly;
+}
+
 .card {
   border: solid 1px red;
+}
+
+/* CHANGE LATER */
+.EditContainer form {
+  display: flex;
+  flex-direction: column;
 }
