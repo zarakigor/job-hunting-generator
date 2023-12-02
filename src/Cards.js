@@ -1,6 +1,7 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import { Context } from "./Context";
 import Modal from "react-modal";
+import EditModal from "./EditModal";
 
 const customStyles = {
   content: {
@@ -16,8 +17,7 @@ const customStyles = {
 Modal.setAppElement("#root");
 
 function Cards(props) {
-  const { list, setList, isDark, setIsDark, handleDelete } =
-    useContext(Context);
+  const { list, setList, handleDelete } = useContext(Context);
   const [copiedJob, setCopiedJob] = useState({ ...props.details });
   const [isEditing, setIsEditing] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
@@ -102,115 +102,14 @@ function Cards(props) {
             <button onClick={handleModalView}>Editi aç</button>
           </div>
         ) : (
-          <div className="EditContainer">
-            <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Hello</h2>
-            <form>
-              <label>
-                Job Title:
-                <input
-                  type="text"
-                  name="title"
-                  onChange={handleEdit}
-                  value={copiedJob.title}
-                />
-              </label>
-              <label>
-                Company/Institution:
-                <input
-                  type="text"
-                  name="company"
-                  onChange={handleEdit}
-                  value={copiedJob.company}
-                />
-              </label>
-              <label>
-                Salary:
-                <input
-                  type="number"
-                  name="salary"
-                  onChange={handleEdit}
-                  value={copiedJob.salary}
-                />
-              </label>
-              <label>
-                Currency:
-                <select
-                  value={copiedJob.currency}
-                  name="currency"
-                  onChange={handleEdit}
-                >
-                  <option value=""></option>
-                  <option value="£">Sterlin</option>
-                  <option value="$">Dolar</option>
-                  <option value="€">Euro</option>
-                  <option value="₺">Türk Lirası</option>
-                </select>
-              </label>
-              <label>
-                {" "}
-                Job Flexibility:{" "}
-                <select
-                  value={copiedJob.flexibility}
-                  name="flexibility"
-                  onChange={handleEdit}
-                >
-                  <option value=""></option>
-                  <option value="In Office">In Office</option>
-                  <option value="Remote">Remote</option>
-                  <option value="Hybrid">Hybrid</option>
-                </select>
-              </label>
-              <label>
-                Job Type:{" "}
-                <input
-                  type="text"
-                  name="type"
-                  onChange={handleEdit}
-                  value={copiedJob.type}
-                  placeholder="Contract,permanent,volunteer etc."
-                />
-              </label>
-              <label>
-                Applied:{" "}
-                <input
-                  type="checkbox"
-                  name="applied"
-                  onChange={handleEdit}
-                  checked={copiedJob.applied}
-                />
-              </label>
-              <label>
-                Application Date{" "}
-                <input
-                  type="date"
-                  name="date"
-                  onChange={handleEdit}
-                  value={copiedJob.date}
-                />
-              </label>
-              <label>
-                Additional Information:
-                <textarea
-                  type="text"
-                  name="extraInfo"
-                  value={copiedJob.extraInfo}
-                  onChange={handleEdit}
-                ></textarea>
-              </label>
-            </form>
-            <button onClick={closeModal}>Close</button>
-            <button onClick={handleModalView}>Stop Editing</button>
-            <button onClick={handleSaveEdit}>Save Changes</button>
-            <button onClick={() => setIsDark(!isDark)}>applied</button>
-            <button
-              onClick={() => {
-                handleDelete(props.id);
-                closeModal();
-              }}
-            >
-              Delete
-            </button>
-          </div>
+          <EditModal
+            copiedJob={copiedJob}
+            id={props.id}
+            closeModal={closeModal}
+            handleModalView={handleModalView}
+            handleEdit={handleEdit}
+            handleSaveEdit={handleSaveEdit}
+          />
         )}
       </Modal>
     </div>
