@@ -2,9 +2,24 @@ import { useContext } from "react";
 import { Context } from "./Context";
 
 function EditModal(props) {
-  const { isDark, setIsDark, handleDelete } = useContext(Context);
-  const { handleEdit, handleSaveEdit, handleModalView, closeModal } = props;
-  const { copiedJob } = props;
+  const { isDark, setIsDark, handleDelete, setIsSaving } = useContext(Context);
+  const {
+    copiedJob,
+    setCopiedJob,
+    handleSaveEdit,
+    handleModalView,
+    closeModal,
+  } = props;
+
+  function handleEdit(event) {
+    const { name, value, type, checked } = event.target;
+    setCopiedJob((prevJob) => {
+      return {
+        ...prevJob,
+        [name]: type === "checkbox" ? checked : value,
+      };
+    });
+  }
 
   return (
     <div className="EditContainer">
@@ -103,7 +118,14 @@ function EditModal(props) {
         </label>
       </form>
       <button onClick={closeModal}>Close</button>
-      <button onClick={handleModalView}>Stop Editing</button>
+      <button
+        onClick={() => {
+          handleModalView();
+          setIsSaving(false);
+        }}
+      >
+        Stop Editing
+      </button>
       <button onClick={handleSaveEdit}>Save Changes</button>
       <button onClick={() => setIsDark(!isDark)}>applied</button>
       <button
