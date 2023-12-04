@@ -14,6 +14,7 @@ function ContextProvider({ children }) {
   }, []);
 
   const [isDark, setIsDark] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
 
   const [job, setJob] = useState({
     id: nanoid(),
@@ -29,6 +30,7 @@ function ContextProvider({ children }) {
     extraInfo: "",
   });
 
+  // changes values in forms
   function handleChange(event) {
     const { name, value, type, checked } = event.target;
     setJob((prevJob) => {
@@ -94,6 +96,8 @@ function ContextProvider({ children }) {
         isDark,
         setIsDark,
         handleDelete,
+        isSaving,
+        setIsSaving,
       }}
     >
       {children}
