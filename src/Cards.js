@@ -17,12 +17,12 @@ const customStyles = {
 Modal.setAppElement("#root");
 
 function Cards(props) {
-  const { list, setList, handleDelete } = useContext(Context);
+  const { list, setList, handleDelete, isSaving, setIsSaving } =
+    useContext(Context);
   const [copiedJob, setCopiedJob] = useState({ ...props.details });
   const [isEditing, setIsEditing] = useState(false);
-  const [isSaving, setIsSaving] = useState(false);
 
-  let subtitle;
+  //let subtitle;
   const [modalIsOpen, setModalIsOpen] = useState(false);
   function openModal() {
     setModalIsOpen(true);
@@ -40,16 +40,6 @@ function Cards(props) {
     setIsEditing(false);
     setModalIsOpen(false);
     setIsSaving(false);
-  }
-
-  function handleEdit(event) {
-    const { name, value, type, checked } = event.target;
-    setCopiedJob((prevJob) => {
-      return {
-        ...prevJob,
-        [name]: type === "checkbox" ? checked : value,
-      };
-    });
   }
 
   //handle translation between editing job and viewing details of the job
@@ -104,10 +94,10 @@ function Cards(props) {
         ) : (
           <EditModal
             copiedJob={copiedJob}
+            setCopiedJob={setCopiedJob}
             id={props.id}
             closeModal={closeModal}
             handleModalView={handleModalView}
-            handleEdit={handleEdit}
             handleSaveEdit={handleSaveEdit}
           />
         )}
