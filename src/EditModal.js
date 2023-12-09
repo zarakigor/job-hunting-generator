@@ -22,7 +22,7 @@ function EditModal(props) {
   }
 
   return (
-    <div className="EditContainer">
+    <div className="EditModal">
       {/* <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Hello</h2> */}
       <form>
         <label>
@@ -137,7 +137,7 @@ function EditModal(props) {
         Stop Editing
       </button>
       <button onClick={handleSaveEdit}>Save Changes</button>
-      <button onClick={() => setIsDark(!isDark)}>applied</button>
+      {/* <button onClick={() => setIsDark(!isDark)}>applied</button> */}
       <button
         onClick={() => {
           handleDelete(props.id);
