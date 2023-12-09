@@ -3,7 +3,7 @@ import { Context } from "./Context";
 import Cards from "./Cards";
 
 function App() {
-  const { list, job, setJob, handleChange, handleSubmit } = useContext(Context);
+  const { list, job, handleChange, handleSubmit } = useContext(Context);
 
   let cardElements = [];
   if (list && list.length > 0) {
@@ -114,7 +114,7 @@ function App() {
             cols={40}
           ></textarea>
         </label>
-        <button>Submit</button>
+        <button className="SubmitButton">Submit</button>
       </form>
       <div className="CardContainer">{cardElements}</div>
     </div>
@@ -126,3 +126,4 @@ export default App;
 // job type a silik hatırlatıcı ekle
 // editcontainer ve viewcontainer ı 2 ayrı elemente .js ye böl
 // cards.js deki ilk card kısmında başlıklar yerine logo ekle
+// viewmodal margin-righy:auto yap
