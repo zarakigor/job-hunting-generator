@@ -95,7 +95,7 @@ function Cards(props) {
         contentLabel="Example Modal"
       >
         {!isEditing ? (
-          <div>
+          <div className="ViewModal">
             <h2>Job Title: {copiedJob.title}</h2>
             <h2>Company: {copiedJob.company}</h2>
             <h2>
