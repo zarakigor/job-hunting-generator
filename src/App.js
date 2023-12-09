@@ -76,6 +76,16 @@ function App() {
           />
         </label>
         <label>
+          Website/URL:
+          <input
+            type="url"
+            name="url"
+            onChange={handleChange}
+            value={job.url}
+            placeholder="https://example.com"
+          />
+        </label>
+        <label>
           Applied:
           <input
             type="checkbox"
@@ -115,3 +125,4 @@ export default App;
 
 // job type a silik hatırlatıcı ekle
 // editcontainer ve viewcontainer ı 2 ayrı elemente .js ye böl
+// cards.js deki ilk card kısmında başlıklar yerine logo ekle
