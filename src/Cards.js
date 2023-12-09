@@ -3,6 +3,11 @@ import { Context } from "./Context";
 import Modal from "react-modal";
 import EditModal from "./EditModal";
 
+import { FaMoneyBill1Wave } from "react-icons/fa6";
+import { GoPersonFill } from "react-icons/go";
+import { FaBuilding } from "react-icons/fa";
+import { FaClock } from "react-icons/fa";
+
 const customStyles = {
   content: {
     top: "50%",
@@ -62,19 +67,23 @@ function Cards(props) {
   //propsları copiede çevir
   return (
     <div className="card" id={props.id}>
-      <h4>
-        Title:<span> {copiedJob.title}</span>
-      </h4>
-      <h4>
-        Company:<span> {copiedJob.company}</span>
-      </h4>
-      <h4>
-        Salary:<span> {copiedJob.salary}</span>
+      <h2>
+        <GoPersonFill />
+        <span> {copiedJob.title}</span>
+      </h2>
+      <h2>
+        <FaBuilding />
+        <span> {copiedJob.company}</span>
+      </h2>
+      <h2>
+        <FaMoneyBill1Wave />
+        <span> {copiedJob.salary}</span>
         <span> {copiedJob.currency}</span>
-      </h4>
-      <h4>
-        Date:<span> {copiedJob.date}</span>
-      </h4>
+      </h2>
+      <h2>
+        <FaClock />
+        <span> {copiedJob.date}</span>
+      </h2>
       <button onClick={openModal}>Open Modal</button>
       <button onClick={() => handleDelete(props.id)}>Delete Modal</button>
 
