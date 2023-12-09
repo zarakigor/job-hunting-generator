@@ -50,7 +50,7 @@ function Cards(props) {
   function handleSaveEdit(event) {
     setIsSaving(true);
     let temp = list;
-    temp.map((element, index) => {
+    temp.forEach((element, index) => {
       if (props.id === element.id) {
         temp[index] = copiedJob;
         setList(temp);
