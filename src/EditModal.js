@@ -90,6 +90,16 @@ function EditModal(props) {
           />
         </label>
         <label>
+          Website/URL:
+          <input
+            type="url"
+            name="url"
+            onChange={handleEdit}
+            value={copiedJob.url}
+            placeholder="https://example.com"
+          />
+        </label>
+        <label>
           Applied:{" "}
           <input
             type="checkbox"
