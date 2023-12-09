@@ -87,9 +87,20 @@ function Cards(props) {
       >
         {!isEditing ? (
           <div>
-            <h2>Title: {copiedJob.title}</h2>
+            <h2>Job Title: {copiedJob.title}</h2>
             <h2>Company: {copiedJob.company}</h2>
-            <button onClick={handleModalView}>Editi aç</button>
+            <h2>
+              Salary:{copiedJob.salary}
+              <span> {copiedJob.currency}</span>
+            </h2>
+            <h2>Job Flexibility:{copiedJob.flexibility}</h2>
+            <h2>Job Type:{copiedJob.type}</h2>
+            <h2>
+              Website:<a href={copiedJob.url}>{copiedJob.url}</a>
+            </h2>
+            <h2>Application Date: {copiedJob.date}</h2>
+            <h2>Additional Information: {copiedJob.extraInfo}</h2>
+            <button onClick={handleModalView}>Edit</button>
           </div>
         ) : (
           <EditModal
