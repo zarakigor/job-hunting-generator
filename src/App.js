@@ -46,10 +46,10 @@ function App() {
           Currency:
           <select value={job.currency} name="currency" onChange={handleChange}>
             <option value=""></option>
-            <option value="£">Sterlin</option>
-            <option value="$">Dolar</option>
+            <option value="£">Pound</option>
+            <option value="$">Dollar</option>
             <option value="€">Euro</option>
-            <option value="₺">Türk Lirası</option>
+            <option value="₺">Turkish Lira</option>
           </select>
         </label>
         <label>
