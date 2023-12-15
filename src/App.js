@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { Context } from "./Context";
 import Cards from "./Cards";
+import Excel from "./Excel";
 
 function App() {
   const { list, job, handleChange, handleSubmit } = useContext(Context);
@@ -117,6 +118,7 @@ function App() {
         <button className="SubmitButton">Submit</button>
       </form>
       <div className="CardContainer">{cardElements}</div>
+      <Excel />
     </div>
   );
 }
